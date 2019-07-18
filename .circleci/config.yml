@@ -1,3 +1,21 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@ManualHuaJi 
+1
+0 0 cooper-anderson-mc/InventoryFilter
+ Code  Issues 1  Pull requests 0  Projects 0  Wiki  Security  Insights
+InventoryFilter/.circleci/config.yml
+@cooper-anderson cooper-anderson Test adding circleci
+2214147 on 27 Jun 2018
+46 lines (34 sloc)  1.08 KB
+    
 # Java Gradle CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
@@ -8,28 +26,28 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-
+      
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-    working_directory: ~/repo
+    working_directory: ~/test
 
     environment:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-
+    
     steps:
       - checkout
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
 
       - run: gradle dependencies
 
@@ -37,7 +55,6 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-
+        
       # run tests!
-      - run:gradlew setupCiWorkspace
-            gradlew build
+      - run: gradle test
