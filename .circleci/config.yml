@@ -13,7 +13,8 @@ jobs:
           key: dependency-cache-{{ checksum "build.gradle" }}{{ checksum "gradle.properties" }}
       - run:
           name: build-jar
-          command: ./gradlew build
+          command: ./gradlew setupCiWorkspace
+          ./gradlew build
       - store_artifacts:
           path: build/libs
       - save_cache:
